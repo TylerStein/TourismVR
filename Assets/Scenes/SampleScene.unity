@@ -758,7 +758,6 @@ MonoBehaviour:
     Event: 
     Data: 
   messageListeners:
-  - {fileID: 0}
   - {fileID: 1484654345}
   authorizationToken: 
 --- !u!4 &1484654344
