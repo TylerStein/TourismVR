@@ -8,7 +8,7 @@ using NativeWebSocket;
 
 public class WSController : MonoBehaviour
 {
-    public string address = "ws://localhost:8080";
+    public string address = "ws://localhost:9080";
 
     public WSMessage lastMessage;
     public List<WSMessageListener> messageListeners;
@@ -108,8 +108,15 @@ public class WSMessage
         throw new Exception($"Failed to parse json message: {message}");
     }
 
+    public string ToJson() {
+        string formattedEvent = Event.Replace("\\", "\\\\");
+        string formattedData = Data.Replace("\\", "\\\\");
+
+        return $"{{ \"event\": \"{formattedEvent}\", \"data\": \"{formattedData}\" }}";
+    }
+
     public byte[] ToBytes() {
-        string json = JsonUtility.ToJson(this);
+        string json = ToJson();
         return System.Text.Encoding.UTF8.GetBytes(json);
     }
 

@@ -412,6 +412,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   videoPlayer: {fileID: 436963247}
+  timestampEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1484654348}
+        m_MethodName: SendTimestampEvent
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  videoTime: 0
 --- !u!1 &653260035
 GameObject:
   m_ObjectHideFlags: 0
@@ -731,9 +746,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1484654344}
+  - component: {fileID: 1484654346}
   - component: {fileID: 1484654347}
   - component: {fileID: 1484654343}
+  - component: {fileID: 1484654348}
   - component: {fileID: 1484654345}
+  - component: {fileID: 1484654350}
+  - component: {fileID: 1484654349}
   m_Layer: 0
   m_Name: WSController
   m_TagString: Untagged
@@ -791,7 +810,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 436963248}
-        m_MethodName: ReceiveMessage
+        m_MethodName: OnFileEvent
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -801,6 +820,33 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+--- !u!114 &1484654346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1484654342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18260434f984d794bb123ebf7231865e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startEvents:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1484654347}
+        m_MethodName: Authenticate
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  applicationQuitEvents: []
 --- !u!114 &1484654347
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -820,6 +866,73 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1484654343}
         m_MethodName: Connect
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1484654348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1484654342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cae1b2849573da41b3ca2f2d9e780dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wsController: {fileID: 1484654343}
+--- !u!114 &1484654349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1484654342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 803bdbd06c96a1947aaaf50faf58073e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  matchEventType: stop
+  messageEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 436963248}
+        m_MethodName: OnPauseEvent
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1484654350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1484654342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 803bdbd06c96a1947aaaf50faf58073e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  matchEventType: play
+  messageEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 436963248}
+        m_MethodName: OnPlayEvent
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

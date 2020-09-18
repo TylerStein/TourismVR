@@ -26,13 +26,11 @@ public class APIController : MonoBehaviour
 
     public StringUnityEvent recieveTokenEvent = new StringUnityEvent();
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        StartCoroutine(authenticate(key, onAuthenticate));
+    public void Authenticate() {
+        StartCoroutine(authenticate(key, onAuthenticated));
     }
 
-    void onAuthenticate(UnityWebRequest result) {
+    private void onAuthenticated(UnityWebRequest result) {
         if (result.isNetworkError || result.isHttpError) {
             Debug.LogError("Error authenticating API access: " + result.error, this);
             return;
@@ -44,13 +42,13 @@ public class APIController : MonoBehaviour
         recieveTokenEvent.Invoke(authResponse.token);
     }
 
-    IEnumerator authenticate(string clientKey, UnityAction<UnityWebRequest> onComplete) {
+    private IEnumerator authenticate(string clientKey, UnityAction<UnityWebRequest> onComplete) {
         UnityWebRequest authRequest = CreateJsonPostRequest(playerAuthUrl, $"{{\"key\":\"{clientKey}\"}}");
         yield return authRequest.SendWebRequest();
         onComplete.Invoke(authRequest);
     }
 
-    UnityWebRequest CreateJsonPostRequest(string url, string bodyJsonString) {
+    private UnityWebRequest CreateJsonPostRequest(string url, string bodyJsonString) {
         UnityWebRequest request = new UnityWebRequest(url, "POST");
         byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(bodyJsonString);
         request.uploadHandler = new UploadHandlerRaw(bodyRaw) as UploadHandler;
